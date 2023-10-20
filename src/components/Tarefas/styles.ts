@@ -1,4 +1,26 @@
 import styled from 'styled-components'
+import varievaeis from '../../styles/varievaeis'
+
+import * as enums from '../../utils/enums/Tarefa'
+
+type TagProps = {
+  prioridade?: enums.Prioridade
+  status?: enums.Status
+  parametro: 'status' | 'prioridade'
+}
+
+const retornaCor = (props: TagProps): string => {
+  if (props.parametro === 'prioridade') {
+    if (props.prioridade === enums.Prioridade.URGENTE)
+      return varievaeis.amarelo2
+    if (props.prioridade === enums.Prioridade.IMPORTANTE)
+      return varievaeis.vermelho
+  } else {
+    if (props.status === enums.Status.PENDENTE) return varievaeis.amarelo
+    if (props.status === enums.Status.CONCLUIDO) return varievaeis.verde
+  }
+  return '#537188'
+}
 
 export const Card = styled.div`
   background-color: #fcfcfc;
@@ -12,11 +34,12 @@ export const Titulo = styled.h3`
   font-weight: bold;
   margin-bottom: 1rem;
 `
-export const Tag = styled.span`
+export const Tag = styled.span<TagProps>`
   padding: 0.25rem 0.5rem;
   font-size: 0.625rem;
   font-weight: bold;
-  background-color: #e1a32a;
+  background-color: ${(props) => retornaCor(props)};
+  color: #f9f9f9;
   border-radius: 0.5rem;
   margin-right: 1rem;
   display: inline-block;
@@ -48,4 +71,10 @@ export const Botao = styled.button`
   background-color: #2f3640;
   border-radius: 0.5rem;
   margin-right: 0.5rem;
+`
+export const BotaoSalvar = styled(Botao)`
+  background-color: ${varievaeis.verde};
+`
+export const BotaoCancelarRemover = styled(Botao)`
+  background-color: ${varievaeis.vermelho};
 `
