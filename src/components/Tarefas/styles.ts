@@ -16,7 +16,7 @@ const retornaCor = (props: TagProps): string => {
     if (props.prioridade === enums.Prioridade.IMPORTANTE)
       return varievaeis.vermelho
   } else {
-    if (props.status === enums.Status.PENDENTE) return varievaeis.amarelo
+    if (props.status === enums.Status.PENDENTE) return varievaeis.laranja
     if (props.status === enums.Status.CONCLUIDO) return varievaeis.verde
   }
   return '#537188'
