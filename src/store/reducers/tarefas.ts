@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import Tarefa from '../../models/Tarefa'
+import { Tarefa } from '../../models/Tarefa'
 import * as enums from '../../utils/enums/Tarefa'
 
 type TarefasState = {
@@ -47,10 +47,21 @@ const tarefasSlice = createSlice({
       if (IndexTarefa > 0) {
         state.Itens[IndexTarefa] = action.payload
       }
+    },
+    adicionar(state, action: PayloadAction<Tarefa>) {
+      const tarefaExiste = state.Itens.find(
+        (tarefa) =>
+          tarefa.Titulo.toLowerCase() === action.payload.Titulo.toLowerCase()
+      )
+      if (tarefaExiste) {
+        alert('essa tarefa já existe!')
+      } else {
+        state.Itens.push(action.payload)
+      }
     }
   }
 })
 
-export const { remover, editar } = tarefasSlice.actions
+export const { remover, editar, adicionar } = tarefasSlice.actions
 
 export default tarefasSlice.reducer
