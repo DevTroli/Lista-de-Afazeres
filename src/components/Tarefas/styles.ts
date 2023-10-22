@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import varievaeis from '../../styles/varievaeis'
 
 import * as enums from '../../utils/enums/Tarefa'
+import { Botao } from '../../styles'
 
 type TagProps = {
   prioridade?: enums.Prioridade
@@ -28,11 +29,17 @@ export const Card = styled.div`
   padding: 1rem;
   margin-bottom: 2.25rem;
   border-radius: 1rem;
+
+  label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
 `
 export const Titulo = styled.h3`
   font-size: 1.125rem;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-left: 0.25rem;
 `
 export const Tag = styled.span<TagProps>`
   padding: 0.25rem 0.5rem;
@@ -60,17 +67,6 @@ export const Descricao = styled.textarea`
 export const BarraAcoes = styled.div`
   boder-top: 1px solid rgba (0, 0, 0, 0.1);
   padding-top: 1rem;
-`
-export const Botao = styled.button`
-  font-weight: bold;
-  font-size: 0.75rem;
-  color: #f9f9f9;
-  padding: 0.5rem 0.75rem;
-  border: none;
-  cursor: pointer;
-  background-color: #2f3640;
-  border-radius: 0.5rem;
-  margin-right: 0.5rem;
 `
 
 export const BotaoCancelarRemover = styled(Botao)`

@@ -9,7 +9,6 @@ export const Form = styled.form`
 
   textarea {
     resize: none;
-    margin: 1rem 0;
   }
 `
 
@@ -28,4 +27,21 @@ export const Opcoes = styled.div`
 export const Opcao = styled.div`
   display: inline;
   text-transform: capitalize;
+`
+
+export const ErrorText = styled.div`
+  color: red;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+`
+
+export const FieldWrapper = styled.div`
+  margin-bottom: 1rem;
+  &.temErro {
+    margin-bottom: 0.75rem;
+  }
+  campo {
+    border: 1px solid red;
+  }
 `

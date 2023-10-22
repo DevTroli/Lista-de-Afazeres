@@ -1,9 +1,10 @@
 import { useDispatch } from 'react-redux'
-
 import { useEffect, useState } from 'react'
+
+import * as enums from '../../utils/enums/Tarefa'
 import * as S from './styles'
-import { BotaoSalvar } from '../../styles/index'
-import { remover, editar } from '../../store/reducers/tarefas'
+import { Botao, BotaoSalvar } from '../../styles/index'
+import { remover, editar, alterarStatus } from '../../store/reducers/tarefas'
 import { Tarefa as TarefaClass } from '../../models/Tarefa'
 
 type Props = TarefaClass
@@ -18,14 +19,38 @@ const Tarefa = ({
   const dispatch = useDispatch()
   const [Editando, setEditando] = useState(false)
   const [Descricao, setDescricao] = useState('')
+  const [checkboxChecked, setCheckboxChecked] = useState(
+    Status === enums.Status.CONCLUIDO
+  )
 
   useEffect(() => {
     if (DescricaOriginal.length > 0) setDescricao(DescricaOriginal)
   }, [DescricaOriginal])
 
+  function alteraStatusTarefa() {
+    setCheckboxChecked(!checkboxChecked)
+    dispatch(
+      alterarStatus({
+        id,
+        finalizado: !checkboxChecked
+      })
+    )
+  }
+
   return (
     <S.Card>
-      <S.Titulo>{Titulo}</S.Titulo>
+      <label htmlFor={Titulo}>
+        <input
+          type="checkbox"
+          id={Titulo}
+          onChange={alteraStatusTarefa}
+          checked={checkboxChecked}
+        />
+        <S.Titulo>
+          {Editando && <em>Editando...</em>}
+          {Titulo}
+        </S.Titulo>
+      </label>
       <S.Tag parametro="prioridade" prioridade={Prioridade}>
         {Prioridade}
       </S.Tag>
@@ -67,7 +92,7 @@ const Tarefa = ({
           </>
         ) : (
           <>
-            <S.Botao onClick={() => setEditando(true)}>Editar</S.Botao>
+            <Botao onClick={() => setEditando(true)}>Editar</Botao>
             <S.BotaoCancelarRemover onClick={() => dispatch(remover(id))}>
               Remover
             </S.BotaoCancelarRemover>

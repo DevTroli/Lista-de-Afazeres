@@ -4,7 +4,7 @@ import NovaTarefa from '../../containers/NovaTarefa'
 const Novatarefa = () => {
   return (
     <>
-      <BarraLateral />
+      <BarraLateral mostarFiltros={false} />
       <NovaTarefa />
     </>
   )
